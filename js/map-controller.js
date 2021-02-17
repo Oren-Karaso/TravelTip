@@ -9,7 +9,7 @@ var gMap;
 console.log('Reday');
 
 mapService.getLocs()
-    .then(locs => console.log('locs', locs))
+.then(locs => console.log('locs', locs))
 
 window.onload = () => {
 
@@ -60,6 +60,15 @@ function panTo(lat, lng) {
     var laLatLng = new google.maps.LatLng(lat, lng);
     gMap.panTo(laLatLng);
 }
+
+// function panToUserLoc() {
+//     document.querySelector('.map-container').addEventListener('click', (ev) => {
+
+//         var pos = new google.maps.LatLng(GeolocationCoordinates.latitude, GeolocationCoordinates.longitude);
+//         gMap.panTo(pos);
+//         getPosition().then()
+//     }
+// }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
 function getPosition() {
