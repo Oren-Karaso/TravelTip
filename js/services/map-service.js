@@ -1,13 +1,25 @@
-'use strict';
+'use strict'
+import { utilServices } from './util-service.js'
+import { storageService } from './storage-service.js'
+
+export const mapService = {
+    getLocs,
+    getGLocations,
+    getGMarkers,
+    getById,
+    updateLocation,
+    deleteLocation,
+    addLocation
+}
+
 const KEY = 'locations';
 var gLocations;
 var gMarkers = [];
 var gCurrDelMark;
 
 
-export const mapService = {
-    getLocs
-}
+
+
 var locs = [{ lat: 11.22, lng: 22.11 }]
 
 function getLocs() {
@@ -16,6 +28,14 @@ function getLocs() {
             resolve(locs);
         }, 2000)
     });
+}
+
+function getGLocations() {
+    return gLocations;
+}
+
+function getGMarkers() {
+    return gMarkers;
 }
 
 
@@ -57,7 +77,7 @@ function _createLocation(name, lat, lng) {
 }
 
 function getById(id) {
-    var item = gLocations.find(function(item) {
+    var item = gLocations.find(function (item) {
         return id === item.id
     })
     return item
@@ -66,7 +86,7 @@ function getById(id) {
 
 function updateLocation(locationId, newTitle) {
     console.log(locationId);
-    var location = gLocations.find(function(location) {
+    var location = gLocations.find(function (location) {
         return location.id === locationId;
     })
     location.name = newTitle;
@@ -74,7 +94,7 @@ function updateLocation(locationId, newTitle) {
 };
 
 function deleteLocation(locationId) {
-    var locationIdx = gLocations.findIndex(function(location) {
+    var locationIdx = gLocations.findIndex(function (location) {
         return locationId === location.id
     })
     gLocations.splice(locationIdx, 1);

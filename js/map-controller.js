@@ -2,7 +2,6 @@
 import { mapService } from './services/map-service.js'
 
 const API_KEY = 'AIzaSyB65mRB3HlbxYhKGjVRdCRGcIvyg8iRNME';
-const GEO_API_KEY = 'AIzaSyB65mRB3HlbxYhKGjVRdCRGcIvyg8iRNME';
 
 const GEO_API = 'https://maps.googleapis.com/maps/api/geocode/outputFormat?parameters'
 
