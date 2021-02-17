@@ -9,13 +9,15 @@ var gMap;
 console.log('Reday');
 
 mapService.getLocs()
-    .then(locs => console.log('locs', locs))
+    .then(locations => console.log('locs', locations))
 
 window.onload = () => {
 
+    renderLocations();
+
     document.querySelector('.map-container').addEventListener('click', (ev) => {
         console.log('Aha!', ev.target);
-        panTo(35.6895, 139.6917);
+        // panTo(35.6895, 139.6917);
     })
 
     initMap()
@@ -40,9 +42,9 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             console.log('google available');
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
-                center: { lat, lng },
-                zoom: 15
-            })
+                    center: { lat, lng },
+                    zoom: 15
+                })
             console.log('Map!', gMap);
         })
 }
@@ -129,17 +131,20 @@ function onDeleteMarker(locationId) {
     var marker;
 }
 
+
 function renderLocations() {
-    var locations = gLocations;
-    var strHtmls = locations.map(function (location) {
-        return `
-        <tr>
-                    <td class="name-td">${location.name}</td>
-                    <td class="latlng">Latitude: <br> ${location.lat} </td>
-                    <td class="latlng">Longitude: <br> ${location.lng}</td>
-                    <td><button onclick="onUpdateLoc('${location.id}')">Edit Title</button><button onclick="onDeleteLoc('${location.id}')">Delete</button></td>
-        </tr>
+    mapService.getLocs()
+        .then(locations => {
+            var strHtmls = locations.map(function(location) {
+                return `
+                    <tr>
+                        <td class="name-td">${location.name}</td>
+                        <td class="latlng">Latitude: <br> ${location.lat} </td>
+                        <td class="latlng">Longitude: <br> ${location.lng}</td>
+                        <td><button onclick="onUpdateLoc('${location.id}')">Edit Title</button><button onclick="onDeleteLoc('${location.id}')">Delete</button></td>
+                    </tr>
         `
-    });
-    document.querySelector('.my-location-table').innerHTML = strHtmls.join('');
+            });
+            document.querySelector('.my-locations-table').innerHTML = strHtmls.join('');
+        });
 }

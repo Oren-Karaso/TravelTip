@@ -19,12 +19,12 @@ var gMarkers = [];
 
 
 
-var locs = [{ lat: 11.22, lng: 22.11 }]
+// var locs = [{ lat: 11.22, lng: 22.11 }]
 
 function getLocs() {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            resolve(locs);
+            resolve(gLocations);
         }, 2000)
     });
 }
@@ -39,35 +39,37 @@ function getgMarkers() {
 }
 
 
+_createLocations();
+
 function _createLocations() {
-    var locations = loadFromStorage(KEY);
+    var locations = storageService.loadFromStorage(KEY);
     console.log(locations, ': locations')
     if (!locations || locations.length === 0) {
         locations = [{
 
-            id: makeId(),
-            name: 'Parents House',
-            lat: 32.61026317356524,
-            lng: 32.61026317356524, 
-            createdAt: new Date(),
-            weather: 'fine'
-        },
-        {
-            id: makeId(),
-            name: 'Seagul Island',
-            lat: 32.60778607350922,
-            lng: 32.60778607350922,
-            createdAt: new Date(),
-            weather: 'fine'
-        },
-        {
-            id: makeId(),
-            name: 'Where I look For Sea-Shells',
-            lat: 32.61918174209623,
-            lng: 32.61918174209623,
-            createdAt: new Date(),
-            weather: 'fine'
-        }
+                id: utilServices.makeId(),
+                name: 'Parents House',
+                lat: 32.61026317356524,
+                lng: 32.61026317356524,
+                createdAt: new Date(),
+                weather: 'fine'
+            },
+            {
+                id: utilServices.makeId(),
+                name: 'Seagul Island',
+                lat: 32.60778607350922,
+                lng: 32.60778607350922,
+                createdAt: new Date(),
+                weather: 'fine'
+            },
+            {
+                id: utilServices.makeId(),
+                name: 'Where I look For Sea-Shells',
+                lat: 32.61918174209623,
+                lng: 32.61918174209623,
+                createdAt: new Date(),
+                weather: 'fine'
+            }
         ];
     };
     gLocations = locations;
@@ -76,7 +78,7 @@ function _createLocations() {
 
 function _createLocation(name, lat, lng) {
     return {
-        id: makeId(),
+        id: utilServices.makeId(),
         name: name,
         lat: lat,
         lng: lng
@@ -84,7 +86,7 @@ function _createLocation(name, lat, lng) {
 }
 
 function getById(id) {
-    var item = gLocations.find(function (item) {
+    var item = gLocations.find(function(item) {
         return id === item.id
     })
     return item
@@ -93,7 +95,7 @@ function getById(id) {
 
 function updateLocation(locationId, newTitle) {
     console.log(locationId);
-    var location = gLocations.find(function (location) {
+    var location = gLocations.find(function(location) {
         return location.id === locationId;
     })
     location.name = newTitle;
@@ -101,7 +103,7 @@ function updateLocation(locationId, newTitle) {
 };
 
 function deleteLocation(locationId) {
-    var locationIdx = gLocations.findIndex(function (location) {
+    var locationIdx = gLocations.findIndex(function(location) {
         return locationId === location.id
     })
     gLocations.splice(locationIdx, 1);
@@ -116,5 +118,5 @@ function addLocation(name, lat, lng) {
 };
 
 function _saveLocationsToStorage() {
-    saveToStorage(KEY, gLocations);
+    storageService.saveToStorage(KEY, gLocations);
 }
