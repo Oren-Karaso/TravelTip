@@ -4,8 +4,8 @@ import { storageService } from './storage-service.js'
 
 export const mapService = {
     getLocs,
-    getGLocations,
-    getGMarkers,
+    getgLocations,
+    getgMarkers,
     getById,
     updateLocation,
     deleteLocation,
@@ -15,7 +15,6 @@ export const mapService = {
 const KEY = 'locations';
 var gLocations;
 var gMarkers = [];
-var gCurrDelMark;
 
 
 
@@ -30,11 +29,12 @@ function getLocs() {
     });
 }
 
-function getGLocations() {
+
+function getgLocations() {
     return gLocations;
 }
 
-function getGMarkers() {
+function getgMarkers() {
     return gMarkers;
 }
 
@@ -44,22 +44,29 @@ function _createLocations() {
     console.log(locations, ': locations')
     if (!locations || locations.length === 0) {
         locations = [{
+
             id: makeId(),
             name: 'Parents House',
             lat: 32.61026317356524,
-            lng: 32.61026317356524
+            lng: 32.61026317356524, 
+            createdAt: new Date(),
+            weather: 'fine'
         },
         {
             id: makeId(),
             name: 'Seagul Island',
             lat: 32.60778607350922,
-            lng: 32.60778607350922
+            lng: 32.60778607350922,
+            createdAt: new Date(),
+            weather: 'fine'
         },
         {
             id: makeId(),
             name: 'Where I look For Sea-Shells',
             lat: 32.61918174209623,
-            lng: 32.61918174209623
+            lng: 32.61918174209623,
+            createdAt: new Date(),
+            weather: 'fine'
         }
         ];
     };

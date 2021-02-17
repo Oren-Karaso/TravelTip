@@ -12,7 +12,7 @@ mapService.getLocs()
     .then(locs => console.log('locs', locs))
 
 window.onload = () => {
-    
+
     document.querySelector('.map-container').addEventListener('click', (ev) => {
         console.log('Aha!', ev.target);
         panTo(35.6895, 139.6917);
@@ -95,7 +95,6 @@ function _connectGoogleApi() {
 }
 
 
-
 function onAddLoc(name, lat, lng) {
     addLocation(name, lat, lng);
     renderLocations();
@@ -128,11 +127,11 @@ function onDeleteMarker(locationId) {
     var locat = getById(locationId);
     console.log(locat);
     var marker;
-} 
+}
 
 function renderLocations() {
     var locations = gLocations;
-    var strHtmls = locations.map(function(location) {
+    var strHtmls = locations.map(function (location) {
         return `
         <tr>
                     <td class="name-td">${location.name}</td>
