@@ -165,6 +165,7 @@ function addListeners() {
             var long = positions.coords.longitude;
             console.log('lat:', lat + ' long:', long);
             panTo(lat, long);
+            onAddMarker('My Location', lat, long);
         });
     });
 }
