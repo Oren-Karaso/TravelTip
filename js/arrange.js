@@ -1,4 +1,3 @@
-
 // CONTROLLER FUNCS//////////////////////////////////////
 
 function handleLocationError(error) {
@@ -51,22 +50,3 @@ function initMap(lat, lng) {
     renderLocations();
 
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

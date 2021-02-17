@@ -43,11 +43,13 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             console.log('google available');
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
-                center: { lat, lng },
-                zoom: 15
-            })
+                    center: { lat, lng },
+                    zoom: 15
+                })
             console.log('Map!', gMap);
         })
+
+
 }
 
 function addMarker(loc) {
@@ -157,7 +159,7 @@ function addListeners() {
 function renderLocations() {
     mapService.getLocs()
         .then(locations => {
-            var strHtmls = locations.map(function (location) {
+            var strHtmls = locations.map(function(location) {
                 return `
                     <tr>
                         <td class="name-td">${location.name}</td>
