@@ -1,3 +1,10 @@
+'use strict';
+const KEY = 'locations';
+var gLocations;
+var gMarkers = [];
+var gCurrDelMark;
+
+
 export const mapService = {
     getLocs
 }
@@ -10,5 +17,7 @@ function getLocs() {
         }, 2000)
     });
 }
+
+
 
 

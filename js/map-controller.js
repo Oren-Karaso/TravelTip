@@ -1,7 +1,10 @@
+'use strict'
 import { mapService } from './services/map-service.js'
 
+const API_KEY = 'AIzaSyB65mRB3HlbxYhKGjVRdCRGcIvyg8iRNME';
+
 var gMap;
-console.log('Main!');
+console.log('Reday');
 
 mapService.getLocs()
     .then(locs => console.log('locs', locs))
@@ -67,7 +70,6 @@ function getPosition() {
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-    const API_KEY = ''; //TODO: Enter your API Key
     var elGoogleApi = document.createElement('script');
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
     elGoogleApi.async = true;
@@ -78,6 +80,4 @@ function _connectGoogleApi() {
         elGoogleApi.onerror = () => reject('Google script failed to load')
     })
 }
-
-
 
