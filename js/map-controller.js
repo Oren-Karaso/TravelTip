@@ -18,6 +18,20 @@ window.onload = () => {
 
     document.querySelector('.map-container').addEventListener('click', (ev) => {
         console.log('Aha!', ev.target);
+
+        gMap.addListener("click", (ev) => {
+            var lat = ev.latLng.lat();
+            var lng = ev.latLng.lng();
+            var locName = prompt('Location\'s Title:');
+            onAddLoc(locName, lat, lng);
+            onAddMarker(locName, lat, lng, map);
+            console.log('lat,lang', lat, lng);
+        });
+
+        // map.setCenter({ lat: 29.55779369335949, lng: 34.95098681009696 });
+        // new google.maps.Marker({ lat: 29.55779369335949, lng: 34.95098681009696 });
+
+        renderLocations();
         // panTo(35.6895, 139.6917);
     })
 
@@ -110,17 +124,17 @@ function _connectGoogleApi() {
 
 
 function onAddLoc(name, lat, lng) {
-    addLocation(name, lat, lng);
+    mapService.addLocation(name, lat, lng);
     renderLocations();
 }
 
 function onAddMarker(name, lat, lng, map) {
     var marker = new google.maps.Marker({
         position: { lat, lng },
-        map,
+        map: gMap,
         title: name
     });
-    marker.setMap(map);
+    // marker.setMap(gMap);
     console.log(marker);
 
 }
