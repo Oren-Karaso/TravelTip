@@ -2,6 +2,9 @@
 import { mapService } from './services/map-service.js'
 
 const API_KEY = 'AIzaSyB65mRB3HlbxYhKGjVRdCRGcIvyg8iRNME';
+const GEO_API_KEY = 'AIzaSyB65mRB3HlbxYhKGjVRdCRGcIvyg8iRNME';
+
+const GEO_API = 'https://maps.googleapis.com/maps/api/geocode/outputFormat?parameters'
 
 var gMap;
 console.log('Reday');
@@ -11,7 +14,7 @@ mapService.getLocs()
 
 window.onload = () => {
     
-    document.querySelector('.btn').addEventListener('click', (ev) => {
+    document.querySelector('.map-container').addEventListener('click', (ev) => {
         console.log('Aha!', ev.target);
         panTo(35.6895, 139.6917);
     })
@@ -67,6 +70,17 @@ function getPosition() {
     })
 }
 
+// function getPosition() {
+//     if (!navigator.geolocation) {
+//         alert("HTML5 Geolocation is not supported in your browser.");
+//         return;
+//     };
+
+//     // One shot position getting or continus watch
+//     navigator.geolocation.getCurrentPosition(showLocation, handleLocationError);
+//     // navigator.geolocation.watchPosition(showLocation, handleLocationError);
+// }
+
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
@@ -81,3 +95,53 @@ function _connectGoogleApi() {
     })
 }
 
+
+
+function onAddLoc(name, lat, lng) {
+    addLocation(name, lat, lng);
+    renderLocations();
+}
+
+function onAddMarker(name, lat, lng, map) {
+    var marker = new google.maps.Marker({
+        position: { lat, lng },
+        map,
+        title: name
+    });
+    marker.setMap(map);
+    console.log(marker);
+
+}
+
+function onUpdateLoc(locationId) {
+    var newTitle = prompt('Enter Title:');
+    updateLocation(locationId, newTitle);
+    renderLocations();
+}
+
+function onDeleteLoc(locationId) {
+    deleteLocation(locationId);
+    // onDeleteMarker();
+    renderLocations();
+}
+
+function onDeleteMarker(locationId) {
+    var locat = getById(locationId);
+    console.log(locat);
+    var marker;
+} 
+
+function renderLocations() {
+    var locations = gLocations;
+    var strHtmls = locations.map(function(location) {
+        return `
+        <tr>
+                    <td class="name-td">${location.name}</td>
+                    <td class="latlng">Latitude: <br> ${location.lat} </td>
+                    <td class="latlng">Longitude: <br> ${location.lng}</td>
+                    <td><button onclick="onUpdateLoc('${location.id}')">Edit Title</button><button onclick="onDeleteLoc('${location.id}')">Delete</button></td>
+        </tr>
+        `
+    });
+    document.querySelector('.my-location-table').innerHTML = strHtmls.join('');
+}
